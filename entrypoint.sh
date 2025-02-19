@@ -860,7 +860,7 @@ function restore_sriov_config() {
 
                 exec_cmd "echo ${vf_pci_addr} > ${DRIVER_PATH}/bind"
 
-                sleep ${BIND_DELAY_SEC}
+                exec_cmd "udevadm settle -E /sys/class/net/$pf_new_dev_name"
 
                 exec_cmd "echo $vf_mtu > $vf_new_netdev_path/mtu"
                 exec_cmd "ip link set dev ${vf_new_dev_name} $vf_adminstate"
